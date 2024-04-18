@@ -10,16 +10,22 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.ashley.iphoneproject.navigation.ROUTE_LOGIN
+import com.ashley.iphoneproject.navigation.ROUTE_REGISTER
 
 @Composable
-fun RegisterScreen(){
+fun RegisterScreen(navController: NavController){
     Column (
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(text = "Please Register Here")
         Spacer(modifier = Modifier.height(10.dp))
-        Button(onClick = { /*TODO*/ }) {
-            Text(text = "or Register")
+        Button(onClick = {
+            navController.navigate(ROUTE_LOGIN)
+        }) {
+            Text(text = "Login")
         }
     }
 }
@@ -27,5 +33,5 @@ fun RegisterScreen(){
 @Preview(showSystemUi = true, showBackground = true)
 @Composable
 fun RegisterScreenPreview(){
-    RegisterScreen()
+    RegisterScreen(rememberNavController())
 }
