@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "592390380431",
+    "project_id": "iphoneproject-2ad4d",
+    "storage_bucket": "iphoneproject-2ad4d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:592390380431:android:199bb4ed8b00554925c9fa",
+        "android_client_info": {
+          "package_name": "com.ashley.iphoneproject"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7rqQQ5woTCLQXDVtNI_bRjkyZsxAJ2fw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

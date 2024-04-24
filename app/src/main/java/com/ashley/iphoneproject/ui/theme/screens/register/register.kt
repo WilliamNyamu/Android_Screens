@@ -32,91 +32,84 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.ashley.iphoneproject.navigation.ROUTE_HOME
 import com.ashley.iphoneproject.navigation.ROUTE_LOGIN
 import com.ashley.iphoneproject.navigation.ROUTE_REGISTER
 
 @Composable
 fun RegisterScreen(navController: NavController){
-    val email by remember {
-        mutableStateOf(TextFieldValue)
-    }
-    var pass by remember {
-        mutableStateOf(TextFieldValue)
-    }
-    var context = LocalContext.current
-    Column (
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color.DarkGray),
+    var email by remember { mutableStateOf(TextFieldValue("")) }
+    var pass by remember { mutableStateOf(TextFieldValue("")) }
+    var confirmpass by remember { mutableStateOf(TextFieldValue("")) }
+    var context= LocalContext.current
+    Column(modifier = Modifier
+        .fillMaxSize()
+        .background(Color.LightGray),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Text(text = "Kindly Register with us :)",
-            color = Color.White,
+        verticalArrangement = Arrangement.Center) {
+
+        Text(text = "Register here",
+            color = Color.Blue,
             fontFamily = FontFamily.SansSerif,
-            fontSize = 30.sp,
-            fontWeight = FontWeight.Bold)
+            fontSize = 30.sp)
         Spacer(modifier = Modifier.height(20.dp))
 
         OutlinedTextField(
-            value = "",
-            onValueChange = {},
-            label = {Text(text = "Enter your email:")},
-            placeholder = {Text(text = "eg: johndoe@gmail.com")},
-            keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next ),
+            value = email, onValueChange = { email = it },
+            label = { Text(text = "Enter Email") },
+
+            keyboardOptions = KeyboardOptions . Default . copy (imeAction = ImeAction.Next),
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(10.dp),
-            colors = TextFieldDefaults.colors(focusedContainerColor = Color.Green)
+                .padding(8.dp),
+
+            )
+        Spacer(modifier = Modifier.height(20.dp))
+
+        OutlinedTextField(value =pass , onValueChange = {pass=it},
+            label = { Text(text = "Enter password") },
+            keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
+        )
+        Spacer(modifier = Modifier.height(20.dp))
+        OutlinedTextField(value =confirmpass , onValueChange = {
+            confirmpass=it},
+            label = { Text(text = "Enter Confirm Pass") },
+
+            keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
         )
         Spacer(modifier = Modifier.height(20.dp))
 
-        OutlinedTextField(
-            value = "",
-            onValueChange = {},
-            label = { Text(text = "Enter Password: ")},
-            placeholder = {Text(text = "Enter your password: ")},
-            keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next ),
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(18.dp),
-            colors = TextFieldDefaults.colors(focusedContainerColor = Color.Green)
-        )
-        Spacer(modifier = Modifier.height(10.dp))
 
-        OutlinedTextField(
-            value = "",
-            onValueChange = {},
-            label = { Text(text = "Confirm  Password: ")},
-            placeholder = {Text(text = "re-enter your password: ")},
-            keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next ),
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(18.dp),
-            colors = TextFieldDefaults.colors(focusedContainerColor = Color.Green)
-        )
+        Button(onClick = {
+            val myregister= AuthViewModel(navController,context)
+            myregister.signup(email.text.trim(),pass.text.trim(),confirmpass.text.trim())
+            navController.navigate(ROUTE_HOME)
 
-        Button(onClick = { /*TODO*/ },
-            modifier = Modifier.fillMaxWidth(), colors = ButtonDefaults.buttonColors(containerColor = Color.Green)
-        ) {
-            Text(text = "Register")
+
+
+
+        }, modifier = Modifier.fillMaxWidth()) {
+            Text(text = "Register ")
         }
         Spacer(modifier = Modifier.height(20.dp))
 
         Button(onClick = {
-                         navController.navigate(ROUTE_LOGIN)
-        },
-            modifier = Modifier.fillMaxWidth(), colors = ButtonDefaults.buttonColors(containerColor = Color.Magenta)
-        ) {
-            Text(text = "Have an account?Login")
+            navController.navigate(ROUTE_LOGIN)
+        }, modifier = Modifier.fillMaxWidth()) {
+            Text(text = "Have an Account? Click to Login")
         }
 
     }
 }
-
-
-@Preview(showSystemUi = true, showBackground = true)
+@Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun RegisterScreenPreview(){
+fun RegisterScreenPreview() {
     RegisterScreen(rememberNavController())
-}
+
+}}

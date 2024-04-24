@@ -38,69 +38,59 @@ import com.ashley.iphoneproject.navigation.ROUTE_REGISTER
 
 
 @Composable
-fun LogInScreen(navController: NavController){
-    val email by remember {
-        mutableStateOf(TextFieldValue)
-    }
-    var pass by remember {
-        mutableStateOf(TextFieldValue)
-    }
-    var context = LocalContext.current
-    Column (
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color.DarkGray),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Text(text = "Please Login Here",
-            color = Color.Blue,
-            fontFamily = FontFamily.SansSerif,
-            fontSize = 30.sp,
-            fontWeight = FontWeight.Bold)
+fun LoginScreen(navController: NavController){
+    var email by remember { mutableStateOf(TextFieldValue("")) }
+    var pass by remember { mutableStateOf(TextFieldValue("")) }
+    var context= LocalContext.current
+    Column(modifier = Modifier
+        .fillMaxSize()
+        .background(Color.Blue),
+        horizontalAlignment = Alignment.CenterHorizontally) {
+
+        Text(text = "Login here",
+            color = Color.Cyan,
+            fontFamily = FontFamily.Cursive,
+            fontSize = 30.sp)
         Spacer(modifier = Modifier.height(20.dp))
 
-        OutlinedTextField(
-            value = "",
-            onValueChange = {},
-            label = { Text(text = "Enter your email: ")},
-            placeholder = {Text(text = "Enter your email: ")},
-            keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next ),
+        OutlinedTextField(value =email , onValueChange = {email=it},
+            label = { Text(text = "Enter Email") },
+            keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next),
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(10.dp)
+                .padding(8.dp),
+
+            )
+        Spacer(modifier = Modifier.height(20.dp))
+
+        OutlinedTextField(value =pass , onValueChange = {pass=it},
+            label = { Text(text = "Enter Password") },
+            keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
         )
         Spacer(modifier = Modifier.height(20.dp))
 
-        OutlinedTextField(
-            value = "",
-            onValueChange = {},
-            label = { Text(text = "Enter Password: ")},
-            placeholder = {Text(text = "Enter your password: ")},
-            keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next ),
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(18.dp)
-        )
-
-        Button(onClick = { /*TODO*/ },
-            modifier = Modifier.fillMaxWidth()
-            ) {
+        Button(onClick = {
+            val mylogin= AuthViewModel(navController, context )
+            mylogin.login(email.text.trim(),pass.text.trim())
+        }, modifier = Modifier.fillMaxWidth()) {
             Text(text = "Log In")
         }
         Spacer(modifier = Modifier.height(20.dp))
 
-        Button(onClick = { /*TODO*/ },
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text(text = "Don't have an account?Please Register")
+        Button(onClick = {
+            navController.navigate(ROUTE_REGISTER)
+        }, modifier = Modifier.fillMaxWidth()) {
+            Text(text = "Don't have account? Click to Register")
         }
 
     }
-}
 
-@Preview(showBackground = true, showSystemUi = true)
+}
+@Preview(showSystemUi = true, showBackground = true)
 @Composable
-fun LoginScreenPreview(){
-    LogInScreen(rememberNavController())
+fun LoginScreenPreview() {
+    LoginScreen(rememberNavController())
 }
