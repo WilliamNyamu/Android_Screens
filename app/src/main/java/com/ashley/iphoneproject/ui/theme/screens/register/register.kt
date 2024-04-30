@@ -45,12 +45,12 @@ fun RegisterScreen(navController: NavController){
     var context= LocalContext.current
     Column(modifier = Modifier
         .fillMaxSize()
-        .background(Color.LightGray),
+        .background(Color.Yellow),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center) {
 
         Text(text = "Register here",
-            color = Color.Blue,
+            color = Color.Black,
             fontFamily = FontFamily.SansSerif,
             fontSize = 30.sp)
         Spacer(modifier = Modifier.height(20.dp))

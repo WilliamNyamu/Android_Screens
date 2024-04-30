@@ -28,7 +28,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.ashley.iphoneproject.navigation.ROUTE_ADD_PRODUCT
 import com.ashley.iphoneproject.navigation.ROUTE_REGISTER
+import com.ashley.iphoneproject.navigation.ROUTE_VIEW_PRODUCT
 
 
 @Composable
@@ -47,14 +49,14 @@ fun HomeScreen(navController: NavController){
         Spacer(modifier = Modifier.height(100.dp))
 
         Button(onClick = {
-            //navController.navigate(ROUTE_ADD_PRODUCT)
+            navController.navigate(ROUTE_ADD_PRODUCT)
         },modifier = Modifier.fillMaxWidth()) {
             Text(text = "Add Product")
         }
         Spacer(modifier = Modifier.height(100.dp))
 
         Button(onClick = {
-            //navController.navigate(ROUTE_VIEW_PRODUCT)
+            navController.navigate(ROUTE_VIEW_PRODUCT)
         },modifier = Modifier.fillMaxWidth()) {
             Text(text = "View Product")
         }

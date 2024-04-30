@@ -10,14 +10,6 @@ import com.ashley.iphoneproject.navigation.ROUTE_LOGIN
 import com.ashley.iphoneproject.navigation.ROUTE_REGISTER
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
-
-//import com.example.morningmvvm.models.User
-//import com.example.morningmvvm.navigation.ROUTE_HOME
-//import com.example.morningmvvm.navigation.ROUTE_LOGIN
-//import com.example.morningmvvm.navigation.ROUTE_REGISTER
-//import com.google.firebase.auth.FirebaseAuth
-//import com.google.firebase.database.FirebaseDatabase
-
 class AuthViewModel(var navController: NavController, var context: Context){
 
     var mAuth:FirebaseAuth
@@ -30,10 +22,10 @@ class AuthViewModel(var navController: NavController, var context: Context){
         progress.setMessage("PLease Wait.....")
     }
     fun signup(email:String,pass:String,confpass:String){
-//       progress.show()
+       progress.show()
 
         if (email.isBlank() || pass.isBlank() ||confpass.isBlank()){
-//            progress.dismiss()
+            progress.dismiss()
             Toast.makeText(context,"Please email and password cannot be blank",Toast.LENGTH_LONG).show()
             return
         }else if (pass != confpass){
@@ -51,6 +43,7 @@ class AuthViewModel(var navController: NavController, var context: Context){
                         if (it.isSuccessful){
                             Toast.makeText(context,"Registered Successfully",Toast.LENGTH_LONG).show()
                             navController.navigate(ROUTE_HOME)
+
 
                         }else{
                             Toast.makeText(context,"${it.exception!!.message}",Toast.LENGTH_LONG).show()
